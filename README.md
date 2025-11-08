@@ -1,0 +1,2 @@
+**Placement Tracker**
+A platform to track you placement progress with the addition feature of finding your probability of getting placed base on the number of problems from different topics using LogisticRegression
