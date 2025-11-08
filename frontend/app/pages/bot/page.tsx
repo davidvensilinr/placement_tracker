@@ -7,6 +7,8 @@ export default function Bot(){
     const [heaps,setHeaps]=useState("")
     const [graphs,setGraphs]=useState("");
     const [dp,setDp]=useState("");
+    const [loading,setLoading]=useState(false);
+    const [prediction,setPrediction]=useState("");
     const predictProb= async(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         if(!arrays||!heaps||!graphs||!dp){
@@ -19,7 +21,7 @@ export default function Bot(){
             graphs,
             dp,
         };
-
+        setLoading(true);
         try{
             const res= await fetch("http://localhost:8000/predict",{
                 method:"POST",
@@ -30,6 +32,7 @@ export default function Bot(){
             console.log(data);
             if(res.ok){
                 console.log(data["Prediction"])
+                setPrediction(data["Prediction"])
             }
         }
         catch(err){
@@ -40,6 +43,7 @@ export default function Bot(){
         setHeaps(" ")
         setGraphs(" ")
         setDp(" ")
+        setLoading(false);
     }
     return(
         <div>
@@ -70,11 +74,13 @@ export default function Bot(){
                 value={dp}
                 onChange={(e)=>{setDp(e.target.value)}}
                 />
-                <button type="submit">Predict</button>
+                <button 
+                disabled={loading}
+                type="submit">{loading?"predicting":"predict"}</button>
                 
 
             </form>
-            <div></div>
+            <h1>{prediction}</h1>
         </div>
     );
 }
