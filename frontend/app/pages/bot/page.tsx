@@ -7,11 +7,33 @@ export default function Bot(){
     const [heaps,setHeaps]=useState("")
     const [graphs,setGraphs]=useState("");
     const [dp,setDp]=useState("");
-    const predictProb=(e:React.FormEvent<HTMLFormElement>)=>{
+    const predictProb= async(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         if(!arrays||!heaps||!graphs||!dp){
             alert("Fill All Fields")
             return;
+        }
+        const array={
+            arrays,
+            heaps,
+            graphs,
+            dp,
+        };
+
+        try{
+            const res= await fetch("http://localhost:8000/predict",{
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body: JSON.stringify(array),
+            });
+            const data = await res.json();
+            console.log(data);
+            if(res.ok){
+                console.log(data["Prediction"])
+            }
+        }
+        catch(err){
+            console.log(err);
         }
         console.log(arrays,heaps,graphs,dp);
         setArrays(" ")
@@ -52,6 +74,7 @@ export default function Bot(){
                 
 
             </form>
+            <div></div>
         </div>
     );
 }

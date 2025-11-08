@@ -15,4 +15,5 @@ print(accuracy_score(y_test,model.predict(X_test)))
 
 with open("model.pkl","wb") as f:
     pickle.dump(model,f)
+print(model.predict_proba([[1,27,7,15]]))
 print("model is successfully trained")
