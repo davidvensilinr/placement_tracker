@@ -50,7 +50,7 @@ export default function Bot(){
             <h1>Predict your possibility of getting placed</h1>
             <form onSubmit={predictProb}>
                 <input
-                className="text-black"
+                className="text-black w-full"
                 placeholder="arrays"
                 value={arrays}
                 type="number"
