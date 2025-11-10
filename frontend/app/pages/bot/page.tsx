@@ -47,16 +47,17 @@ export default function Bot(){
     }
     return(
         <div>
-            <h1>Predict your possibility of getting placed</h1>
+            <h1 className="text-center text-3xl font-sans p-4">Predict your possibility of getting placed</h1>
             <form onSubmit={predictProb}>
                 <input
-                className="text-black w-full"
+                className="w-1/2 p-4"
                 placeholder="arrays"
                 value={arrays}
                 type="number"
                 onChange={(e)=>{setArrays(e.target.value)}}
                 />
                 <input placeholder="heaps"
+                className="w-1/2 p-4"
                 type="number"
                 value={heaps}
                 onChange={(e)=>{setHeaps(e.target.value)}}
@@ -66,21 +67,23 @@ export default function Bot(){
                 <input placeholder="graphs"
                 type="number"
                 value={graphs}
+                className="w-1/2 p-4"
                 onChange={(e)=>{setGraphs(e.target.value)}}
                 />
                 <input placeholder="dynamic programming"
                 required 
                 type="number"
+                className="w-1/2 p-4"
                 value={dp}
                 onChange={(e)=>{setDp(e.target.value)}}
                 />
-                <button 
+                <button className="w-full p-4 font-sans text-2xl bg-amber-400 text-black hover:bg-teal-300"
                 disabled={loading}
                 type="submit">{loading?"predicting":"predict"}</button>
                 
 
             </form>
-            <h1>{prediction}</h1>
+            <h1 className="text-sans text-2xl p-4 text-center text-green-400">You are <span className="text-black">{prediction} % getting placed</span></h1>
         </div>
     );
 }
